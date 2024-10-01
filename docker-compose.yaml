@@ -1,0 +1,33 @@
+services:
+  techdome-frontend:
+    build: ./project/Techdome-frontend
+    ports:
+      - "3000:3000"
+    networks:
+      - project
+
+  techdome-backend:
+    build: ./project/Techdome-backend
+    ports:
+      - "5050:5050"
+    networks:
+      - project
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    networks:
+      - project
+    volumes:
+      - mongo-data:/data/db
+
+networks:
+  project:
+    driver: bridge
+
+volumes:
+  mongo-data:
+    driver: local

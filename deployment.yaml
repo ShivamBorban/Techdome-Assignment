@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: techdome-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: techdome-backend
+  template:
+    metadata:
+      labels:
+        app: techdome-backend
+    spec:
+      containers:
+      - name: backend-cont
+        image: shivamborban/techdome-techdome-backend
+        ports:
+        - containerPort: 5050
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: techdome-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: techdome-frontend
+  template:
+    metadata:
+      labels:
+        app: techdome-frontend
+    spec:
+      containers:
+      - name: frontend-cont
+        image: shivamborban/techdome-techdome-frontend
+        ports:
+        - containerPort: 3000
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: techdome-database
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: techdome-database
+  template:
+    metadata:
+      labels:
+        app: techdome-database
+    spec:
+      containers:
+      - name: database-cont
+        image: mongo
+        ports:
+        - containerPort: 27017
